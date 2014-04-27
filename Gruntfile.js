@@ -75,6 +75,10 @@ module.exports = function(grunt) {
         files: ['styles/**/*.scss'],
         tasks: 'sass'
       },
+      haml: {
+        files: ['haml/**/*.haml'],
+        tasks: 'haml'
+      },
       livereload: {
         files: ['**/*.html', 'js/*.js', 'css/*.css'],
         options: {
@@ -106,6 +110,18 @@ module.exports = function(grunt) {
         }]
       }
     },
+    haml: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'haml',
+          src: ['**/*.haml'],
+          dest: './',
+          ext: '.html'
+        }]
+      }
+    },
+
     connect: {
       site: {}
     }
@@ -120,9 +136,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-haml');
 
   // Default task.
-  grunt.registerTask('default', ['coffee', 'sass', 'concat', 'uglify']);
+  grunt.registerTask('default', ['coffee', 'sass', 'haml', 'concat', 'uglify']);
   grunt.registerTask('live_dev', ['connect', 'watch']);
 
 };
